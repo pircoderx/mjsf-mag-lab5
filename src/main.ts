@@ -11,6 +11,37 @@ import router from './router'
 
 import './style.css';
 
+import * as firebase from "firebase/app";
+// import firebase from 'firebase';
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.authRequired)) {
+    if (firebase.auth().currentUser) {
+      next();
+    } else {
+      alert('You must be logged in to see this page');
+      next({
+        path: '/',
+      });
+    }
+  } else {
+    next();
+  }
+});
+
+import { initializeApp } from "firebase/app";
+
+var firebaseConfig = {
+  apiKey: "AIzaSyDwml6fGxNJAMmVTqw18jxtbKaG6fcz3ck",
+  authDomain: "mjsf-mag-lab5-8e8e1.firebaseapp.com",
+  projectId: "mjsf-mag-lab5-8e8e1",
+  storageBucket: "mjsf-mag-lab5-8e8e1.appspot.com",
+  messagingSenderId: "914214443384",
+  appId: "1:914214443384:web:62436c9971b1ac6ba9108d"
+};
+// Initialize Firebase
+initializeApp(firebaseConfig);
+
+const firebase_app = initializeApp(firebaseConfig);
 const app = createApp(App)
 
 /* tooltip "plugin" begin */

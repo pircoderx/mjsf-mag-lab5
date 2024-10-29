@@ -1,3 +1,22 @@
+<script setup lang="ts">
+import {RouterLink} from "vue-router";
+import { getAuth, signOut } from "firebase/auth";
+import { useRouter } from 'vue-router';
+const router = useRouter()
+function logout() {
+  const auth = getAuth();
+  signOut(auth)
+  .then(() => {
+    alert('Successfully logged out');
+    router.push('/');
+  })
+  .catch(error => {
+    alert(error.message);
+    router.push('/');
+  });
+}
+</script>
+
 <template>
     <nav class="shadow border-gray-200 dark:bg-gray-900">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -36,11 +55,48 @@
                             About
                         </RouterLink>
                     </li>
+                    <li>
+                        <RouterLink
+                                activeClass="font-medium text-black dark:text-white  bg-gray-100"
+
+                                class="block py-2 px-3 rounded hover:bg-gray-100"
+                                to="/register"
+                              >
+                            Register
+                        </RouterLink>
+                    </li>
+                    <li>
+                        <RouterLink
+                                activeClass="font-medium text-black dark:text-white  bg-gray-100"
+
+                                class="block py-2 px-3 rounded hover:bg-gray-100"
+                                to="/login"
+                              >
+                            Login
+                        </RouterLink>
+                    </li>
+                    <li>
+                        <RouterLink
+                                activeClass="font-medium text-black dark:text-white  bg-gray-100"
+
+                                class="block py-2 px-3 rounded hover:bg-gray-100"
+                                to="/todo"
+                              >
+                            Todo
+                        </RouterLink>
+                    </li>
+                    <li>
+                      <button
+                        type="button"
+                        @click="logout"
+                        class="block py-2 px-3 rounded hover:bg-gray-100"
+                      >
+                        Log Out  
+                      </button>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
 </template>
-<script setup lang="ts">
-import {RouterLink} from "vue-router";
-</script>
+
