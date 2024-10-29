@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.tooltip_parent {
+}
+.tooltip_parent .tooltip {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+}
+.tooltip_parent:hover .tooltip_hover {
+  visibility: visible;
+}
+.tooltip_parent:click .tooltip_click {
+  visibility: visible;
+}
+.tooltip_parent:focus .tooltip_focus {
+  visibility: visible;
+}
+
